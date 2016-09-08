@@ -1,7 +1,7 @@
 # FrosvSlide
 v1.0
 
-``` javascript
+```javascript
 $('#house').slide({
   box: "#house", //总框架
   bigPic: "#houseTop", //大图框架
