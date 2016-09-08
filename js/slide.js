@@ -66,7 +66,7 @@
 
   Plugin.prototype.showImg = function(nowImg) {
     //展示图片
-    $(this.options.slideImg).attr('src', $(this.imgSrc)[nowImg]);
+    $(this.options.slideImg).attr('src', $(this.imgSrc)[nowImg-1]);
   };
 
   $.fn[pluginName] = function(options) {
