@@ -4,39 +4,128 @@
 <head>
   <meta charset="UTF-8">
   <title>slide</title>
-  <link rel="stylesheet" type="text/css" href="demo.css">
+  <link rel="stylesheet" href="css/demo.css">
 </head>
 
 <body>
-  <div id="fun"></div>
-  <div class="ban" id="house">
-    <div class="village-close" id="houseClose"></div>
-    <div class="ban2" id="houseTop">
-      <div class="prev1" id="housePrev1"></div>
-      <div class="next1" id="houseNext1"></div>
-      <ul>
-        <li><img src="http://dl.bizhi.sogou.com/images/2012/02/27/237278.jpg"></li>
-        <li><img src="http://i0.hdslb.com/group1/M00/44/5B/oYYBAFbRLIuARLeSAAJAaSQWy9s392.jpg"></li>
-        <li><img src="http://easyread.ph.126.net/LKSz9VOJfiF4rfP8nVcW_A==/7917056565547250774.jpg"></li>
-        <li><img src="http://dl.bizhi.sogou.com/images/2012/01/19/36179.png"></li>
+  <div class="ban" id="demo1">
+    <div class="pic-prev" id="prev"><img src="images/index_tab_l.png" alt="" /></div>
+    <div class="pic-next" id="next"><img src="images/index_tab_r.png" alt="" /></div>
+    <div class="ban2" id="picBox">
+      <ul data-num="1">
+        <li>
+          <a href="javascript:;"><img src="images/b1.jpg" width="500" height="500" alt="" /></a>
+        </li>
+        <li>
+          <a href="javascript:;"><img src="images/b2.jpg" width="500" height="500" alt="" /></a>
+        </li>
+        <li>
+          <a href="javascript:;"><img src="images/b3.jpg" width="500" height="500" alt="" /></a>
+        </li>
+        <li>
+          <a href="javascript:;"><img src="images/b4.jpg" width="500" height="500" alt="" /></a>
+        </li>
+        <li>
+          <a href="javascript:;"><img src="images/b5.jpg" width="500" height="500" alt="" /></a>
+        </li>
+        <li>
+          <a href="javascript:;"><img src="images/b1.jpg" width="500" height="500" alt="" /></a>
+        </li>
+        <li>
+          <a href="javascript:;"><img src="images/b2.jpg" width="500" height="500" alt="" /></a>
+        </li>
+        <li>
+          <a href="javascript:;"><img src="images/b3.jpg" width="500" height="500" alt="" /></a>
+        </li>
+        <li>
+          <a href="javascript:;"><img src="images/b4.jpg" width="500" height="500" alt="" /></a>
+        </li>
+        <li>
+          <a href="javascript:;"><img src="images/b5.jpg" width="500" height="500" alt="" /></a>
+        </li>
       </ul>
     </div>
-    <div class="min_pic clearfix">
-      <div class="num" id="housebottom">
+    <div class="min-pic">
+      <div class="prev-btn1" id="thumPrev"><img src="images/feel3.png" width="9" height="18" alt="" /></div>
+      <div class="num clearfix" id="thumBox">
         <ul>
-          <li><img src="http://dl.bizhi.sogou.com/images/2012/02/27/237278.jpg"></li>
-          <li><img src="http://i0.hdslb.com/group1/M00/44/5B/oYYBAFbRLIuARLeSAAJAaSQWy9s392.jpg"></li>
-          <li><img src="http://easyread.ph.126.net/LKSz9VOJfiF4rfP8nVcW_A==/7917056565547250774.jpg"></li>
-          <li><img src="http://dl.bizhi.sogou.com/images/2012/01/19/36179.png"></li>
+          <li>
+            <a href="javascript:;"><img src="images/s1.jpg" width="80" height="80" alt="" /></a>
+          </li>
+          <li>
+            <a href="javascript:;"><img src="images/s2.jpg" width="80" height="80" alt="" /></a>
+          </li>
+          <li>
+            <a href="javascript:;"><img src="images/s3.jpg" width="80" height="80" alt="" /></a>
+          </li>
+          <li>
+            <a href="javascript:;"><img src="images/s4.jpg" width="80" height="80" alt="" /></a>
+          </li>
+          <li>
+            <a href="javascript:;"><img src="images/s5.jpg" width="80" height="80" alt="" /></a>
+          </li>
+          <li>
+            <a href="javascript:;"><img src="images/s1.jpg" width="80" height="80" alt="" /></a>
+          </li>
+          <li>
+            <a href="javascript:;"><img src="images/s2.jpg" width="80" height="80" alt="" /></a>
+          </li>
+          <li>
+            <a href="javascript:;"><img src="images/s3.jpg" width="80" height="80" alt="" /></a>
+          </li>
+          <li>
+            <a href="javascript:;"><img src="images/s4.jpg" width="80" height="80" alt="" /></a>
+          </li>
+          <li>
+            <a href="javascript:;"><img src="images/s5.jpg" width="80" height="80" alt="" /></a>
+          </li>
         </ul>
-        <div class="img-total">
-          <p><span id="houseImg">1</span>/<span id="houseTotal">12</span></p>
-        </div>
       </div>
+      <div class="next-btn1" id="thumNext"><img src="images/feel4.png" width="9" height="18" alt="" /></div>
     </div>
   </div>
-  <script src="jquery-3.1.0.min.js"></script>
-  <script src="./slide.js"></script>
+  <div class="mhc"></div>
+  <div class="pop-up" id="demo2">
+    <div class="pop-up-xx"><img src="images/chacha3.png" width="40" height="40" alt="" /></div>
+    <div class="pop-up2" id="ban_pic2">
+      <div class="prev1" id="prev2"><img src="images/index_tab_l.png" width="28" height="51" alt="" /></div>
+      <div class="next1" id="next2"><img src="images/index_tab_r.png" width="28" height="51" alt="" /></div>
+      <ul>
+        <li>
+          <a href="javascript:;"><img src="images/b1.jpg" width="500" height="500" alt="" /></a>
+        </li>
+        <li>
+          <a href="javascript:;"><img src="images/b2.jpg" width="500" height="500" alt="" /></a>
+        </li>
+        <li>
+          <a href="javascript:;"><img src="images/b3.jpg" width="500" height="500" alt="" /></a>
+        </li>
+        <li>
+          <a href="javascript:;"><img src="images/b4.jpg" width="500" height="500" alt="" /></a>
+        </li>
+        <li>
+          <a href="javascript:;"><img src="images/b5.jpg" width="500" height="500" alt="" /></a>
+        </li>
+        <li>
+          <a href="javascript:;"><img src="images/b1.jpg" width="500" height="500" alt="" /></a>
+        </li>
+        <li>
+          <a href="javascript:;"><img src="images/b2.jpg" width="500" height="500" alt="" /></a>
+        </li>
+        <li>
+          <a href="javascript:;"><img src="images/b3.jpg" width="500" height="500" alt="" /></a>
+        </li>
+        <li>
+          <a href="javascript:;"><img src="images/b4.jpg" width="500" height="500" alt="" /></a>
+        </li>
+        <li>
+          <a href="javascript:;"><img src="images/b5.jpg" width="500" height="500" alt="" /></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <script src="js/jquery-3.1.0.min.js"></script>
+  <script src="js/slide.js"></script>
 </body>
 
 </html>
