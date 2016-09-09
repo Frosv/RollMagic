@@ -26,7 +26,7 @@ $('#demo1').slide({
 
   mhc:".mhc",//朦灰层(未更新)
 
-  autoplay:true,//是否自动播放(未更新)
+  autoplay:true,//是否自动播放
 
   interTime:5000,//图片自动切换间隔
   delayTime:400,//切换一张图片时间
