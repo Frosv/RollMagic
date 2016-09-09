@@ -1,6 +1,9 @@
 # FrosvSlide
 v1.0
 
+此插件仅绑定了切换和按钮功能，css样式可以自行定义，图片当前位置还有总数只需要将class或者id穿进去就可以自动加入就可以使用，反正找不到也不会自己加进去
+
+
 ```javascript
 $('#house').slide({
   box: "#house", //总框架
