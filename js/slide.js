@@ -68,6 +68,8 @@
     var close = this.options.close;
 
     //改变上下文，将function中的this指向全局this
+
+
     //大图按钮事件绑定
     this.$element.on('click', next, $.proxy(this.nextEvent, this));
     this.$element.on('click', perv, $.proxy(this.prevEvent, this));
@@ -84,21 +86,35 @@
     if (this.options.autoPlay == 'ture') {
       // console.log(this);
       var _this = this;
-      setInterval(function() {
-        // console.log(this);
+      var playTime = setInterval(function() {
         var flag = $(_this.options.picBox).find('ul').data('num');
-        // console.log(flag);
         _this.showBig(flag);
         _this.showThum(flag);
         flag++;
-        // console.log(_this.imgLength);
         if (flag == _this.imgLength) {
           flag = 0;
           // console.log(flag);
         }
         $(_this.options.picBox).find('ul').data('num', flag);
       }, _this.options.interTime);
-    }
+    };
+    $(this.options.picBox).hover(function() {
+      clearTimeout(playTime);
+    }, function() {
+      // console.log(this)
+      // var _this = this;
+      playTime = setInterval(function() {
+        var flag = $(_this.options.picBox).find('ul').data('num');
+        _this.showBig(flag);
+        _this.showThum(flag);
+        flag++;
+        if (flag == _this.imgLength) {
+          flag = 0;
+          // console.log(flag);
+        }
+        $(_this.options.picBox).find('ul').data('num', flag);
+      }, _this.options.interTime);
+    });
   };
 
   Plugin.prototype.prevEvent = function(event) {
@@ -132,6 +148,9 @@
     bigNum++;
     $(flag).data('num', bigNum);
   };
+
+  // $('.classname').css('display','none');
+  // $('.classname').css('display','none');
 
   Plugin.prototype.closeEvent = function() {
     // $(this.options.box).css('display', 'none');
