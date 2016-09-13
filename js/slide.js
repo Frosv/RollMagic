@@ -53,9 +53,10 @@
     this.bindEvent();
 
 
-    if (this.options.autoPlay == 'ture') {
+    if (this.options.autoPlay) {
       this.autoPlay();
     }
+
     $(this.options.totalImg).html(this.imgLength);
 
 
