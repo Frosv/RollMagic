@@ -1,4 +1,6 @@
-# 一个简单的幻灯片插件
+### 一个简单的幻灯片插件
+
+> 基础配置
 
 ```javascript
 $('#demo1').RollMagic({
@@ -25,3 +27,10 @@ $('#demo1').RollMagic({
   totalImg: '#totalImg' //图片总数
 });
 ```
+**box**
+
+实例化的总框架
+
+**picBox**
+
+大图的框架
