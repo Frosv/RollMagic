@@ -7,7 +7,6 @@
 (function($) {
   var pluginName = 'RollMagic';
   var defaults = {
-
     //默认配置
     bigWidth: 800,
     bigNum: 0,
@@ -16,11 +15,13 @@
     delayTime: 0
   };
 
+  //获取每个节点
   function Plugin(element, options) {
     this.$window = $(window);
     this.$document = $(document);
     this.$element = $(element);
     this.options = $.extend({}, defaults, options); //后面覆盖前面
+    // console.log(this.options);
 
     this.imgNum = $(this.options.slideBox).find('img').length;
     this.btnName = this.options.slideNum;
@@ -30,11 +31,23 @@
     this.imgLength = $(this.options.picBox).find('ul li').length;
     this.thumLenth = $(this.options.thumBox).find('ul li').length;
     this.thumWidth = $(this.options.thumBox).find('ul li').outerWidth(true);
+    this.beforeInit = this.options.beforeInit;
+    this.inited = this.options.inited;
+    // console.log(this.beforeInit);
 
+    // this.beforeInit();
     this.init();
   };
 
+
+
+  //初始化
   Plugin.prototype.init = function() {
+    //初始化之前
+    if(this.beforeInit && typeof this.beforeInit === 'function'){
+      // console.log('ok');
+      this.beforeInit();
+    }
     $(this.options.thumBox).find('ul').width(this.thumLenth * this.thumWidth);
     $(this.options.imgTotal).html(this.imgLength);
     var bigNum = this.options.bigNum;
@@ -59,9 +72,14 @@
 
     $(this.options.totalImg).html(this.imgLength);
 
-
+    //实例化之后
+    if(this.inited && typeof this.inited === 'function'){
+      this.inited();
+    }
   };
 
+
+  //绑定事件
   Plugin.prototype.bindEvent = function() {
     //大图按钮
     var perv = this.options.prev;
@@ -87,9 +105,8 @@
     // this.$element.on('click', close, $.proxy(this.closeEvent, this));
   };
 
+  //图片播放
   Plugin.prototype.autoPlay = function() {
-    // console.log(this);
-    // console.log(this);
     var _this = this;
     var playTime = setInterval(function() {
       var flag = $(_this.options.picBox).find('ul').data('num');
@@ -98,7 +115,6 @@
       flag++;
       if (flag == _this.imgLength) {
         flag = 0;
-        // console.log(flag);
       }
       $(_this.options.picBox).find('ul').data('num', flag);
       _this.displayNum(flag);
@@ -106,8 +122,6 @@
     $(this.options.picBox).hover(function() {
       clearTimeout(playTime);
     }, function() {
-      // console.log(this)
-      // var _this = this;
       playTime = setInterval(function() {
         var flag = $(_this.options.picBox).find('ul').data('num');
         _this.showBig(flag);
@@ -115,7 +129,6 @@
         flag++;
         if (flag == _this.imgLength) {
           flag = 0;
-          // console.log(flag);
         }
         $(_this.options.picBox).find('ul').data('num', flag);
         _this.displayNum(flag);
@@ -123,10 +136,9 @@
     });
   };
 
+  //向左按钮事件
   Plugin.prototype.prevEvent = function(event) {
 
-    // console.log('prev');
-    // var bigNum = $(this.options.nowImg).html();
     var flag = $(this.options.picBox).find('ul');
     var bigNum = $(flag).data('num');
     // console.log(bigNum);
@@ -142,9 +154,9 @@
     this.displayNum(bigNum);
   };
 
+  //向右按钮事件
   Plugin.prototype.nextEvent = function() {
 
-    // console.log('next');
     var flag = $(this.options.picBox).find('ul');
     var bigNum = $(flag).data('num');
     if (bigNum == this.imgLength) {
@@ -157,19 +169,19 @@
     this.displayNum(bigNum);
   };
 
-  // $('.classname').css('display','none');
-  // $('.classname').css('display','none');
-
-  Plugin.prototype.closeEvent = function() {
+  //关闭按钮事件
+  Plugin.prototype.closeEvent = function(el) {
     // $(this.options.box).css('display', 'none');
   };
 
+  //大图显示
   Plugin.prototype.showBig = function(bigNum) {
     // console.log()
     $(this.options.picBox).find('ul li').eq(bigNum).fadeIn(this.options.delayTime).siblings('li').fadeOut(this.options.delayTime);
     $(this.options.thumBox).find('li').eq(bigNum).addClass('on').siblings(this).removeClass('on');
   };
 
+  //缩略图显示
   Plugin.prototype.showThum = function(thumNum) {
     // console.log(thumNum);
     var displayNum = thumNum - this.options.displayThum + 2;
@@ -184,15 +196,19 @@
         displayWidth = -(displayNum - 1) * this.thumWidth;
       }
 
-      $(this.options.thumBox).find('ul').stop().animate({ 'left': displayWidth }, this.options.delayTime);
+      $(this.options.thumBox).find('ul').stop().animate({
+        'left': displayWidth
+      }, this.options.delayTime);
     }
   };
 
+  //显示当前个数
   Plugin.prototype.displayNum = function(bigNum) {
     var imgNumber = $(this.options.nowImg);
     $(imgNumber).html(bigNum);
   }
 
+  //暴露方法
   $.fn[pluginName] = function(options) {
     var args = Array.prototype.slice.call(arguments, 1);
 
@@ -212,26 +228,47 @@
 
 })(jQuery);
 
-$('#demo1').RollMagic({
-  box: "#demo1", //总框架
+var app = $('#demo1').RollMagic({
+  //总框架
+  box: "#demo1",
 
-  picBox: "#picBox", //大图框架
-  thumBox: "#thumBox", //小图框架
+  //大图框架
+  picBox: "#picBox",
+  //小图框架
+  thumBox: "#thumBox",
 
-  prev: "#prev", //大图左箭头
-  next: "#next", //大图右箭头
+  //大图左箭头
+  prev: "#prev",
+  //大图右箭头
+  next: "#next",
 
-  thumPrev: "#thumPrev", //小图左箭头
-  thumNext: "#thumNext", //小图右箭头
+  //小图左箭头
+  thumPrev: "#thumPrev",
+  //小图右箭头
+  thumNext: "#thumNext",
 
-  autoplay: true, //是否自动播放
+  //是否自动播放
+  autoplay: true,
 
-  interTime: 5000, //图片自动切换间隔
-  delayTime: 400, //切换一张图片时间
+  //图片自动切换间隔
+  interTime: 5000,
+  //切换一张图片时间
+  delayTime: 400,
 
-  order: 0, //当前显示的图片
-  displayThum: 5, //小图显示数量
+  //当前显示的图片
+  order: 0,
+  //小图显示数量
+  displayThum: 5,
 
-  nowImg: '#nowImg', //当前位置
-  totalImg: '#totalImg' //图片总数
+  //当前位置
+  nowImg: '#nowImg',
+
+  //图片总数
+  totalImg: '#totalImg',
+
+  beforeInit: function() {
+    console.log('beforeInit');
+  },
+
+  inited: function() {}
 });
