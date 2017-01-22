@@ -3,29 +3,49 @@
 > 基础配置
 
 ```javascript
-$('#demo1').RollMagic({
-  box: "#demo1", //总框架
+var app = $('#demo1').RollMagic({
+  //总框架
+  box: "#demo1",
 
-  picBox: "#picBox", //大图框架
-  thumBox: "#thumBox", //缩略图框架
+  //大图框架
+  picBox: "#picBox",
+  //小图框架
+  thumBox: "#thumBox",
 
-  prev: "#prev", //大图左箭头
-  next: "#next", //大图右箭头
+  //大图左箭头
+  prev: "#prev",
+  //大图右箭头
+  next: "#next",
 
-  thumPrev: "#thumPrev", //缩略图左箭头
-  thumNext: "#thumNext", //缩略图右箭头
+  //小图左箭头
+  thumPrev: "#thumPrev",
+  //小图右箭头
+  thumNext: "#thumNext",
 
-  autoplay: true, //是否自动播放
+  //是否自动播放
+  autoplay: true,
 
-  interTime: 5000, //图片自动切换间隔
-  delayTime: 400, //切换一张图片时间
+  //图片自动切换间隔
+  interTime: 5000,
+  //切换一张图片时间
+  delayTime: 400,
 
-  order: 0, //当前显示的图片
-  displayThum: 5, //缩略图显示数量
+  //当前显示的图片
+  order: 0,
+  //小图显示数量
+  displayThum: 5,
 
-  //额外配置(后期可能删除，这个是针对当时工作时要显示当前位置使用的，但是其实可以写个钩子给使用的人在实例化了之后去拿到这些东西然后自定义)
-  nowImg: '#nowImg', //当前位置
-  totalImg: '#totalImg' //图片总数
+  //当前位置
+  nowImg: '#nowImg',
+
+  //图片总数
+  totalImg: '#totalImg',
+
+  beforeInit: function() {
+    console.log('beforeInit');
+  },
+
+  inited: function() {}
 });
 ```
 **box**
