@@ -5,7 +5,7 @@
  */
 
 (function($) {
-  var pluginName = 'slide';
+  var pluginName = 'RollMagic';
   var defaults = {
 
     //默认配置
@@ -212,7 +212,7 @@
 
 })(jQuery);
 
-$('#demo1').slide({
+$('#demo1').RollMagic({
   box: "#demo1", //总框架
 
   picBox: "#picBox", //大图框架
