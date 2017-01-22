@@ -1,7 +1,7 @@
 # 一个简单的幻灯片插件
 
 ```javascript
-$('#demo1').slide({
+$('#demo1').RollMagic({
   box: "#demo1", //总框架
 
   picBox: "#picBox", //大图框架
