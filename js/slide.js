@@ -17,8 +17,6 @@
 
   //获取每个节点
   function Plugin(element, options) {
-    this.$window = $(window);
-    this.$document = $(document);
     this.$element = $(element);
     this.options = $.extend({}, defaults, options); //后面覆盖前面
     // console.log(this.options);
@@ -53,7 +51,8 @@
     var bigNum = this.options.bigNum;
     var thumNum = this.options.thumNum;
     var _this = this;
-    $(this.options.thumBox).find('li').on('click', function(event) {
+    // debugger
+    $(this.options.thumBox).on('click','li', function(event) {
       var numIndex = $(_this.options.thumBox).find('li').index(this);
       bigNum = thumNum = numIndex;
       _this.showBig(bigNum);
