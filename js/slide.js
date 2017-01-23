@@ -266,9 +266,8 @@ var app = $('#demo1').RollMagic({
   //图片总数
   totalImg: '#totalImg',
 
-  beforeInit: function() {
-    console.log('beforeInit');
-  },
+  //event
+  beforeInit: function() {},
 
   inited: function() {}
 });
