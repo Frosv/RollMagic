@@ -1,0 +1,25 @@
+.demo-box{
+  position: relative;
+  margin: 0 auto;
+  width: 600px;
+  height: 600px;
+}
+
+.img-box{
+  position: relative;
+  margin: 0 auto;
+  width: 500px;
+  height: 500px;
+  overflow: hidden;
+}
+
+.img-box li{
+  position: absolute;
+  left: 0;
+  list-style: none;
+  display: none;
+}
+
+.on{
+  display: block !important;
+}

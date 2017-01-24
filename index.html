@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>RollMagic</title>
+  <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+  <div class="demo-box" id="demo">
+    <ul class="img-box" id="imgBox">
+      <li>
+        <img src="images/b1.jpg" alt="">
+      </li>
+      <li>
+        <img src="images/b2.jpg" alt="">
+      </li>
+    </ul>
+    <div class="button-box" id="bottonBox">
+      <button type="button" name="button" id="prev">上一个</button>
+      <button type="button" name="button" id="next">下一个</button>
+    </div>
+  </div>
+  <script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
+  <script type="text/javascript" src="js/rollmagic.js"></script>
+  <script type="text/javascript">
+    $('#demo').RollMagic({
+      box:'#demo',
+      imgBox:'#imgBox',
+      prevBotton:'#prev',
+      nextBotton:'#next',
+      imgDisplay: 0
+      // rollType: 'roll'
+    });
+  </script>
+</body>
+
+</html>
