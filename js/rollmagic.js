@@ -12,6 +12,7 @@
     // this.rollType = this.options.rollType;
     this.init();
   };
+
   //初始化
   Plugin.prototype.init = function() {
     // console.log(this.$box);
@@ -27,10 +28,11 @@
       console.log('显示当前数超出图片总数!');
       return;
     }
-    this.$imgBox.find('li').eq(this.options.imgDisplay).addClass('on');
+    this.$imgBox.find('li').eq(this.options.imgDisplay).css('display','block');
     this.bindEvent();
   };
 
+  //绑定事件
   Plugin.prototype.bindEvent = function() {
     var prev = this.options.prevBotton;
     var next = this.options.nextBotton;
@@ -38,23 +40,26 @@
     this.$box.on('click', prev, $.proxy(this.prevEvent, this));
   };
 
+  //下一张事件
   Plugin.prototype.nextEvent = function() {
     var _this = this;
     _this.options.imgDisplay++;
     if (_this.options.imgDisplay == _this.imgLength) {
       _this.options.imgDisplay = 0;
     }
-    _this.$imgBox.find('li').eq(_this.options.imgDisplay).addClass('on').siblings('li').removeClass('on');
+    _this.$imgBox.find('li').eq(_this.options.imgDisplay).css('display','block').siblings('li').css('display','none');
   };
 
+  //上一张事件
   Plugin.prototype.prevEvent = function() {
     var _this = this;
     if (_this.options.imgDisplay == 0) {
-      _this.options.imgDisplay == _this.imgLength;
+      _this.options.imgDisplay = _this.imgLength;
     }
     _this.options.imgDisplay--;
-    _this.$imgBox.find('li').eq(_this.options.imgDisplay).addClass('on').siblings('li').removeClass('on');
+    _this.$imgBox.find('li').eq(_this.options.imgDisplay).css('display','block').siblings('li').css('display','none');
   };
+
   //暴露方法
   $.fn[pluginName] = function(options) {
     var args = Array.prototype.slice.call(arguments, 1);
