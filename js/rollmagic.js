@@ -23,6 +23,7 @@
     // console.log(this.imgLength);
     // debugger;
     // console.log(typeof(this.options.imgDisplay));
+
     //判断设置图片的当前显示数是否超出总数
     if (this.options.imgDisplay + 1 > this.imgLength) {
       console.log('显示当前数超出图片总数!');
@@ -43,20 +44,24 @@
   //下一张事件
   Plugin.prototype.nextEvent = function() {
     var _this = this;
+    _this.$imgBox.find('li').eq(_this.options.imgDisplay).fadeOut('slow');//淡出
     _this.options.imgDisplay++;
     if (_this.options.imgDisplay == _this.imgLength) {
       _this.options.imgDisplay = 0;
     }
+    _this.$imgBox.find('li').eq(_this.options.imgDisplay).fadeIn('slow');//淡入
     _this.$imgBox.find('li').eq(_this.options.imgDisplay).css('display','block').siblings('li').css('display','none');
   };
 
   //上一张事件
   Plugin.prototype.prevEvent = function() {
     var _this = this;
+    _this.$imgBox.find('li').eq(_this.options.imgDisplay).fadeOut('slow');//淡出
     if (_this.options.imgDisplay == 0) {
       _this.options.imgDisplay = _this.imgLength;
     }
     _this.options.imgDisplay--;
+    _this.$imgBox.find('li').eq(_this.options.imgDisplay).fadeIn('slow');//淡入
     _this.$imgBox.find('li').eq(_this.options.imgDisplay).css('display','block').siblings('li').css('display','none');
   };
 
