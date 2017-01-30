@@ -29,6 +29,15 @@
       console.log('显示当前数超出图片总数!');
       return;
     }
+
+    //判断缩略图是否存在
+    if(this.options.thumBox && $(this.options.thumBox).length){
+      // console.log('thum ex');
+
+    }else {
+      console.log('Arguments thumBox is null or error');
+    }
+
     this.$imgBox.find('li').eq(this.options.imgDisplay).css('display','block');
     this.bindEvent();
   };
