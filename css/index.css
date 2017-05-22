@@ -9,7 +9,6 @@ ul{
   position: relative;
   margin: 0 auto;
   width: 600px;
-  height: 600px;
 }
 
 .img-box{
@@ -31,7 +30,7 @@ ul{
   height: 50px;
   float: left;
   margin-right: 10px;
-}
+} 
 
 .thum-box li img {
   width: 50px;
