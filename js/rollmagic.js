@@ -2,6 +2,7 @@
   var pluginName = 'RollMagic';
   var defaults = {
     //默认配置
+    imgDisplay: 0
   };
 
   //方法
@@ -14,6 +15,7 @@
     this.imgLength = $(this.options.imgBox).find('img').length;
     // this.rollType = this.options.rollType;
     this.init();
+    console.log(imgDisplay);
 
   };
 
