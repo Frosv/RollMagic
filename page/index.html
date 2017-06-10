@@ -6,46 +6,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>RollMagic</title>
-  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="./css/index.css">
 </head>
 
 <body>
   <div class="demo-box" id="demo">
     <ul class="img-box" id="imgBox">
       <li>
-        <img src="images/b1.jpg" alt="">
+        <img src="../images/b1.jpg" alt="">
       </li>
       <li>
-        <img src="images/b2.jpg" alt="">
+        <img src="../images/b2.jpg" alt="">
       </li>
       <li>
-        <img src="images/b3.jpg" alt="">
+        <img src="../images/b3.jpg" alt="">
       </li>
     </ul>
     <div class="thum-box" id="thumBox">
       <ul class="clearfix">
         <li>
-          <img src="images/b1.jpg" alt="">
+          <img src="../images/b1.jpg" alt="">
         </li>
         <li>
-          <img src="images/b2.jpg" alt="">
+          <img src="../images/b2.jpg" alt="">
         </li>
         <li>
-          <img src="images/b3.jpg" alt="">
+          <img src="../images/b3.jpg" alt="">
         </li>
       </ul>
     </div>
     <div class="button-box" id="bottonBox">
-      <button type="button" name="button" id="prev">上一个</button>
-      <button type="button" name="button" id="next">下一个</button>
+      <span type="button" name="button" id="prev" class="prev">上一个</span>
+      <span type="button" name="button" id="next" class="next">下一个</span>
     </div>
-    <div class="button-box" id="thumBottonBox">
+    <div class="button-box-thum" id="thumBottonBox">
       <button type="button" name="button" id="thumPrev">缩略图上一个</button>
       <button type="button" name="button" id="thumNext">缩略图下一个</button>
     </div>
   </div>
-  <script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
-  <script type="text/javascript" src="js/rollmagic.js"></script>
+  <script type="text/javascript" src="../js/jquery-3.1.0.min.js"></script>
+  <script type="text/javascript" src="./rollmagic.js"></script>
   <script type="text/javascript">
     $('#demo').RollMagic({
       box: '#demo',
@@ -56,7 +56,10 @@
       thumBox: '#thumBox',
       thumPrevBotton: '#thumPrev',
       thumNextBotton: '#thumNext', //显示缩略图下一张
-      thumImgDisplay: 1 //显示缩略图的个数
+      thumImgDisplay: 1, //显示缩略图的个数
+      beforeInit: function() {
+        console.log(123);
+      }//初始化之前
       // rollType: 'roll'
     });
   </script>

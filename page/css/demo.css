@@ -100,7 +100,7 @@ img {
   cursor: pointer;
 }
 
-.pic-prev img{
+.pic-prev img {
   width: 28px;
   height: 51px;
 }
@@ -115,7 +115,7 @@ img {
   cursor: pointer;
 }
 
-.pic-next img{
+.pic-next img {
   width: 28px;
   height: 51px
 }
@@ -183,31 +183,17 @@ img {
   float: left;
 }
 
-
 .clearfix {
-
   *zoom: 1;
-
 }
-
-
 
 .clearfix:before,
-
 .clearfix:after {
-
   display: table;
-
   line-height: 0;
-
   content: "";
-
 }
 
-
-
 .clearfix:after {
-
   clear: both;
-
 }

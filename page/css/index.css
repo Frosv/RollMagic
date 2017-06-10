@@ -1,17 +1,18 @@
-li{
+li {
   list-style: none;
 }
 
-ul{
+ul {
   padding: 0;
 }
-.demo-box{
+
+.demo-box {
   position: relative;
   margin: 0 auto;
   width: 600px;
 }
 
-.img-box{
+.img-box {
   position: relative;
   margin: 0 auto;
   width: 500px;
@@ -19,18 +20,18 @@ ul{
   overflow: hidden;
 }
 
-.img-box li{
+.img-box li {
   position: absolute;
   left: 0;
   display: none;
 }
 
-.thum-box li{
+.thum-box li {
   width: 50px;
   height: 50px;
   float: left;
   margin-right: 10px;
-} 
+}
 
 .thum-box li img {
   width: 50px;
@@ -50,3 +51,29 @@ ul{
 .clearfix {
   *zoom: 1;
 }
+
+
+/*btn-box*/
+
+.button-box{
+  position: absolute;
+  top: 250px;
+  width: 110%;
+  margin-left: -30px;
+}
+
+.button-box span{
+  cursor: pointer;
+  padding: 5px;
+  background-color: #337ab7;
+  color: #fff;
+  border-radius: 5px;
+  
+}
+.next {
+  float: right;
+  margin-left: 20px;
+}
+
+
+/*btn-box end*/

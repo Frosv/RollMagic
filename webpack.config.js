@@ -3,9 +3,11 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin'); //输入css文件
 const HtmlWebpackPlugin = require('html-webpack-plugin'); //html
 
+const jquery = require('jquery');
+
 const config = {
   // devtool: 'eval',
-  entry: './src/page/mystores/index.js', //文件入口
+  entry: './page/index.js', //文件入口
   output: {
     filename: 'js/[name]-[hash:8].js',
     publicPath: '/',
@@ -61,15 +63,15 @@ const config = {
     ]
   },
   plugins: [
-    // new webpack.ProvidePlugin({
-    //   $: 'jquery',
-    //   jQuery: 'jquery',
-    //   'window.jQuery': 'jquery',
-    //   'window.$': 'jquery'
-    // }),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery',
+      'window.$': 'jquery'
+    }),
     new HtmlWebpackPlugin({ //html注入文件插件
       filename: 'index.html', //文件名
-      template: './src/page/mystores/index.html', //渲染模板
+      template: './page/index.html', //渲染模板
       // minify: { //压缩HTML
       //   removeComments: true,
       //   collapseWhitespace: true
