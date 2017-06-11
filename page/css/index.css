@@ -21,9 +21,9 @@ ul {
 }
 
 .img-box li {
-  position: absolute;
-  left: 0;
-  display: none;
+  /*position: absolute;
+  left: 0;*/
+  /*display: none;*/
 }
 
 .thum-box li {

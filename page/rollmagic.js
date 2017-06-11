@@ -2,7 +2,8 @@
   var pluginName = 'RollMagic';
   var defaults = {
     //默认配置
-    imgDisplay: 0
+    imgDisplay: 0, //图片当前显示位置
+    playType: 'roll' //图片显示方式
   };
 
   //方法
@@ -42,8 +43,16 @@
     // debugger;
     // console.log(typeof(this.options.imgDisplay));
 
+    //默认加上相对定位
+    this.$imgBox.css({
+      'position': 'relative',
+      'overflow': 'hidden'
+    });
 
-    
+
+
+
+
 
 
     //判断设置图片的当前显示数是否超出总数
@@ -60,22 +69,53 @@
     //   console.log('Arguments thumBox is null or error');
     // }
 
+
+    this.ifPlayType();
+
+
+
+  };
+
+  //判断显示方式
+
+  Plugin.prototype.ifPlayType = function () {
+
+    console.log(this.options.playType);
+
+    if (this.options.playType == 'display') {
+      this.$imgBox.find('li').css({
+        'position': 'absolute',
+        'left': '0',
+        'display':'none'
+      });
+      this.$imgBox.find('li').eq(this.options.imgDisplay).css('display', 'block');
+
+      this.bindEvent('display');
+    } else if (this.options.playType == 'roll') {
+      this.$imgBox.find('li').css({
+        'float': 'left'
+      });
+
+      this.bindEvent('roll');
+    }
+
     //展示选择第几张图
-    this.$imgBox.find('li').eq(this.options.imgDisplay).css('display', 'block');
 
     //绑定事件
-    this.bindEvent();
+
   };
 
 
 
   //绑定事件
-  Plugin.prototype.bindEvent = function () {
+  Plugin.prototype.bindEvent = function (playType) {
     var prev = this.options.prevBotton;
     var next = this.options.nextBotton;
-    var thumNext = this.options.thumNextBotton;
-    this.$box.on('click', next, $.proxy(this.nextEvent, this));
-    this.$box.on('click', prev, $.proxy(this.prevEvent, this));
+    // var thumNext = this.options.thumNextBotton;
+    if (playType == 'display') {
+      this.$box.on('click', next, $.proxy(this.nextEvent, this));
+      this.$box.on('click', prev, $.proxy(this.prevEvent, this));
+    }
     // this.$box.on('click', thumNext, $.proxy(this.thumNext, this)); //给缩略图下一张绑定事件
   };
 
