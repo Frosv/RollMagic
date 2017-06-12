@@ -3,18 +3,24 @@
   var defaults = {
     //默认配置
     imgDisplay: 0, //图片当前显示位置
-    playType: 'roll' //图片显示方式
+    playType: 'display' //图片显示方式,'roll','display'
   };
 
   //方法
   function Plugin(element, options) {
     this.options = $.extend({}, defaults, options);
     //缓存基本参数
-    this.$box = $(this.options.box);
-    this.$imgBox = $(this.options.imgBox);
-    // this.$thumBox = $(this.options.thumBox);
-    this.imgLength = $(this.options.imgBox).find('img').length;
-    var picIndex; //当前显示位置
+
+    this.$box = $(this.options.box); //整体框架
+    this.$imgBox = $(this.options.imgBox); //大图框架
+    this.imgLength = this.$imgBox.find('img').length; //大图数量
+
+    this.$thumImgBox = $(this.options.thumBox); //缩略图框架
+
+    this.thumImgLenght = this.$thumImgBox.find('img').length; //缩略图数量
+
+    var picIndex; //用于存储当前显示位置
+
 
     //初始化前执行事件钩子
     this.beforeInit = this.options.beforeInit;
@@ -22,38 +28,18 @@
       this.beforeInit();
     }
 
-    // this.rollType = this.options.rollType;
-
     // 调用初始化
     this.init();
-
   };
-
-  //初始化之前事件
-
 
   //初始化
   Plugin.prototype.init = function () {
-    // console.log(this.$box);
-    // if(this.rollType == 'roll'){
-    //   this.$imgBox.find('li').css('float','left');
-    // }
-    //显示当前的显示数
-    // console.log(this.imgLength);
-    // debugger;
-    // console.log(typeof(this.options.imgDisplay));
 
-    //默认加上相对定位
+    //默认给大图加上相对定位
     this.$imgBox.css({
       'position': 'relative',
       'overflow': 'hidden'
     });
-
-
-
-
-
-
 
     //判断设置图片的当前显示数是否超出总数
     if (this.options.imgDisplay + 1 > this.imgLength) {
@@ -61,19 +47,17 @@
       return;
     }
 
-    //判断缩略图是否存在
-    // if (this.options.thumBox && $(this.options.thumBox).length) {
-    //   // console.log('thum ex');
-    //   this.thumBoxShow();
-    // } else {
-    //   console.log('Arguments thumBox is null or error');
-    // }
+    //判断缩略图与大图是否相同
+    if (this.imgLength != this.thumImgLenght) {
+      console.log('图片数量不相等!')
+    }
 
 
+    //判断显示用户要求显示第几张然后给这张加上红框
+    this.$thumImgBox.find('li').eq(this.options.imgDisplay).addClass('thum-border');
+
+    //执行判断播放类型
     this.ifPlayType();
-
-
-
   };
 
   //判断显示方式
@@ -83,15 +67,21 @@
     console.log(this.options.playType);
 
     if (this.options.playType == 'display') {
+      //加上绝对定位让图片重叠在一起
       this.$imgBox.find('li').css({
         'position': 'absolute',
         'left': '0',
-        'display':'none'
+        'display': 'none'
       });
+
+      //找到当前显示图片
       this.$imgBox.find('li').eq(this.options.imgDisplay).css('display', 'block');
 
+      //执行时间绑定
+      //可加上向左滚动事件
       this.bindEvent('display');
     } else if (this.options.playType == 'roll') {
+      //给大图加上向左浮动
       this.$imgBox.find('li').css({
         'float': 'left'
       });
@@ -99,34 +89,43 @@
       this.bindEvent('roll');
     }
 
-    //展示选择第几张图
-
-    //绑定事件
-
   };
-
-
 
   //绑定事件
   Plugin.prototype.bindEvent = function (playType) {
+    //大图按钮
     var prev = this.options.prevBotton;
     var next = this.options.nextBotton;
-    // var thumNext = this.options.thumNextBotton;
+
+    //缩略图按钮
+    var thumNext = this.options.thumNextBotton;
+    var thumPrev = this.options.thumPrevBotton;
+
     if (playType == 'display') {
       this.$box.on('click', next, $.proxy(this.nextEvent, this));
       this.$box.on('click', prev, $.proxy(this.prevEvent, this));
+
+      this.$box.on('click', thumNext, $.proxy(this.thumNext, this)); //给缩略图下一张绑定事件
+      this.$box.on('click', thumPrev, $.proxy(this.thumPrev, this)); //给缩略图下一张绑定事件
     }
-    // this.$box.on('click', thumNext, $.proxy(this.thumNext, this)); //给缩略图下一张绑定事件
+
   };
 
   //下一张事件
   Plugin.prototype.nextEvent = function (num) {
     // debugger
+    console.log(typeof(num));
     var _this = this;
 
     //判断是否有传值，有就把值放进去，没有就把初始化的显示位置放入
     if (num == undefined) {
       _this.picIndex = num;
+    } else if (num != undefined && typeof(num) == 'number') {
+
+      //如果传入的值存在就让大图显示传入的值然后跳出
+      _this.$imgBox.find('li').eq(num).css('display', 'block').siblings('li').css('display', 'none');
+      return;
+
     } else if (!_this.picIndex) {
       _this.picIndex = _this.options.imgDisplay;
     }
@@ -144,20 +143,27 @@
     //将下一张淡入
     _this.$imgBox.find('li').eq(_this.picIndex).fadeIn('slow');
 
-
     _this.$imgBox.find('li').eq(_this.picIndex).css('display', 'block').siblings('li').css('display', 'none');
+    console.log(_this.picIndex);
 
-    // console.log(_this.options.imgDisplay);
+    this.thumNext(_this.picIndex);
 
   };
 
   //上一张事件
   Plugin.prototype.prevEvent = function (num) {
+    
     var _this = this;
 
     //判断是否有传值，有就把值放进去，没有就把初始化的显示位置放入
     if (num == undefined) {
       _this.picIndex = num;
+    } else if (num != undefined && typeof(num) == 'number') {
+
+      //如果传入的值存在就让大图显示传入的值然后跳出
+      _this.$imgBox.find('li').eq(num).css('display', 'block').siblings('li').css('display', 'none');
+      return;
+
     } else if (!_this.picIndex) {
       _this.picIndex = _this.options.imgDisplay;
     }
@@ -174,29 +180,66 @@
 
     _this.$imgBox.find('li').eq(_this.picIndex).css('display', 'block').siblings('li').css('display', 'none');
 
+    this.thumPrev(_this.picIndex);
+
   };
 
-  //显示缩略图个数
-  // Plugin.prototype.thumBoxShow = function () {
-  //   var _thumBoxWidth = $(this.$thumBox).find('li').eq(0).outerWidth(true);
-  //   $(this.$thumBox).css({
-  //     'overflow': 'hidden',
-  //     'width': _thumBoxWidth * this.options.thumImgDisplay
-  //   });
-  //   $(this.$thumBox).find('ul').css('width', _thumBoxWidth * this.imgLength);
-  // }
+  Plugin.prototype.thumNext = function (num) {
+    // debugger
+    var _this = this;
 
-  //缩略图下一张
-  // Plugin.prototype.thumNext = function (num) {
-  //   var _thumBoxWidth = $(this.$thumBox).find('li').eq(0).outerWidth(true);
-  //   var $thumBox = $(this.$thumBox).find('ul');
-  //   var _thisThumMarginLeft = parseInt($thumBox.css('margin-left') || 0, 10);
-  //   if (_thisThumMarginLeft == -(parseInt($thumBox.css('width'), 10) - _thumBoxWidth)) {
-  //     $thumBox.css('margin-left', 0);
-  //     return;
-  //   }
-  //   $thumBox.css('margin-left', -(_thumBoxWidth * this.options.thumImgDisplay - _thisThumMarginLeft))
-  // }
+    //判断是否有传值，有就把值放进去，没有就把初始化的显示位置放入
+    if (num == undefined) {
+      _this.picIndex = num;
+    } else if (num != undefined && typeof(num) == 'number') {
+
+      //如果传入的值存在就让大图显示传入的值然后跳出
+      _this.$thumImgBox.find('li').eq(num).addClass('thum-border').siblings('li').removeClass('thum-border');
+      return;
+
+    } else if (!_this.picIndex) {
+      _this.picIndex = _this.options.imgDisplay;
+    }
+
+    _this.picIndex++;
+
+    if (_this.picIndex == _this.thumImgLenght) {
+      _this.picIndex = 0;
+    }
+
+    this.nextEvent(_this.picIndex);
+
+    _this.$thumImgBox.find('li').eq(_this.picIndex).addClass('thum-border').siblings('li').removeClass('thum-border');
+
+  };
+
+  Plugin.prototype.thumPrev = function (num) {
+    var _this = this;
+
+    //判断是否有传值，有就把值放进去，没有就把初始化的显示位置放入
+    if (num == undefined) {
+      _this.picIndex = num;
+    } else if (num != undefined && typeof(num) == 'number') {
+
+      //如果传入的值存在就让大图显示传入的值然后跳出
+      _this.$thumImgBox.find('li').eq(num).addClass('thum-border').siblings('li').removeClass('thum-border');
+      return;
+
+    } else if (!_this.picIndex) {
+      _this.picIndex = _this.options.imgDisplay;
+    }
+
+    if (_this.picIndex == 0) {
+      _this.picIndex = _this.thumImgLenght;
+    }
+
+    _this.picIndex--;
+
+    this.prevEvent(_this.picIndex);
+
+    _this.$thumImgBox.find('li').eq(_this.picIndex).addClass('thum-border').siblings('li').removeClass('thum-border');
+
+  };
 
   //暴露方法
   $.fn[pluginName] = function (options) {

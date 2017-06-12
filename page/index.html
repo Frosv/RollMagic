@@ -40,8 +40,8 @@
       <span type="button" name="button" id="next" class="next">下一个</span>
     </div>
     <div class="button-box-thum" id="thumBottonBox">
-      <button type="button" name="button" id="thumPrev">缩略图上一个</button>
-      <button type="button" name="button" id="thumNext">缩略图下一个</button>
+      <span class="thum-prev" type="button" name="button" id="thumPrev">上一个</span>
+      <span class="thum-next" type="button" name="button" id="thumNext">下一个</span>
     </div>
   </div>
   <script type="text/javascript" src="../js/jquery-3.1.0.min.js"></script>
@@ -53,13 +53,13 @@
       prevBotton: '#prev',
       nextBotton: '#next',
       imgDisplay: 0,
-      // thumBox: '#thumBox',
-      // thumPrevBotton: '#thumPrev',
-      // thumNextBotton: '#thumNext', //显示缩略图下一张
+      thumBox: '#thumBox',
+      thumPrevBotton: '#thumPrev',
+      thumNextBotton: '#thumNext',
       // thumImgDisplay: 1, //显示缩略图的个数
-      beforeInit: function() {
+      beforeInit: function () {
         console.log(123);
-      }//初始化之前
+      } //初始化之前
       // rollType: 'roll'
     });
   </script>

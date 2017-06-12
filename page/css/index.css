@@ -55,21 +55,23 @@ ul {
 
 /*btn-box*/
 
-.button-box{
+.button-box,
+.button-box-thum {
   position: absolute;
   top: 250px;
   width: 110%;
   margin-left: -30px;
 }
 
-.button-box span{
+.button-box span,
+.button-box-thum span {
   cursor: pointer;
   padding: 5px;
   background-color: #337ab7;
   color: #fff;
   border-radius: 5px;
-  
 }
+
 .next {
   float: right;
   margin-left: 20px;
@@ -77,3 +79,35 @@ ul {
 
 
 /*btn-box end*/
+
+
+/* thum box */
+
+.thum-box .thum-border {
+  border: 3px solid #5cb85c;
+}
+
+.thum-box li {
+  border: 3px solid transparent;
+}
+
+.thum-box ul {
+  margin: 10px auto;
+}
+
+.button-box-thum{
+  width: 140%;
+  margin-left: -100px;
+}
+
+.button-box-thum {
+  top: 525px;
+}
+
+.thum-next {
+  float: right;
+  margin-left: 20px;
+}
+
+
+/* thum box end */
