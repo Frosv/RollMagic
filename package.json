@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "clear": "rm -rf dist",
-    "start": "webpack-dev-server --hot --inline --color",
+    "start": "webpack-dev-server --inline --hot --color",
     "build": "npm run clear && webpack --optimize-minimize --progress --profile"
   },
   "repository": {

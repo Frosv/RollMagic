@@ -16,7 +16,6 @@ const config = {
   devServer: {
     compress: true, //使用gzip压缩
     port: 9999, //端口号
-    hot: true //热处理
   },
   module: {
     rules: [{
