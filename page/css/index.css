@@ -6,6 +6,15 @@ ul {
   padding: 0;
 }
 
+.switch{
+}
+
+.switch li{
+  width: 500px;
+  height: 500px;
+  float: left;
+}
+
 .demo-box {
   position: relative;
   margin: 0 auto;
@@ -18,12 +27,6 @@ ul {
   width: 500px;
   height: 500px;
   overflow: hidden;
-}
-
-.img-box li {
-  /*position: absolute;
-  left: 0;*/
-  /*display: none;*/
 }
 
 .thum-box li {
@@ -95,7 +98,7 @@ ul {
   margin: 10px auto;
 }
 
-.button-box-thum{
+.button-box-thum {
   width: 140%;
   margin-left: -100px;
 }

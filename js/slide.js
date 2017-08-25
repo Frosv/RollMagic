@@ -5,6 +5,11 @@
  */
 
 (function($) {
+
+
+
+
+
   var pluginName = 'RollMagic';
   var defaults = {
     //默认配置
@@ -14,6 +19,9 @@
     autoPlay: 'ture',
     delayTime: 0
   };
+
+
+
 
   //获取每个节点
   function Plugin(element, options) {
@@ -77,6 +85,10 @@
     }
   };
 
+  $('#abc').RollMagic('next');
+  
+  var x = $('#abc').RollMagic;
+x.next();
 
   //绑定事件
   Plugin.prototype.bindEvent = function() {
