@@ -1,4 +1,14 @@
-(function ($) {
+/*
+ *作者: FrosV
+ *版本: 0.0.2
+ *
+ */
+
+
+/*
+ *如何使用
+ */
+(function ($, undefined) {
   var pluginName = 'RollMagic';
   var defaults = {
     //默认配置
@@ -114,13 +124,13 @@
   //下一张事件
   Plugin.prototype.nextEvent = function (num) {
     // debugger
-    console.log(typeof(num));
+    console.log(typeof (num));
     var _this = this;
 
     //判断是否有传值，有就把值放进去，没有就把初始化的显示位置放入
     if (num == undefined) {
       _this.picIndex = num;
-    } else if (num != undefined && typeof(num) == 'number') {
+    } else if (num != undefined && typeof (num) == 'number') {
 
       //如果传入的值存在就让大图显示传入的值然后跳出
       _this.$imgBox.find('li').eq(num).css('display', 'block').siblings('li').css('display', 'none');
@@ -152,13 +162,13 @@
 
   //上一张事件
   Plugin.prototype.prevEvent = function (num) {
-    
+
     var _this = this;
 
     //判断是否有传值，有就把值放进去，没有就把初始化的显示位置放入
     if (num == undefined) {
       _this.picIndex = num;
-    } else if (num != undefined && typeof(num) == 'number') {
+    } else if (num != undefined && typeof (num) == 'number') {
 
       //如果传入的值存在就让大图显示传入的值然后跳出
       _this.$imgBox.find('li').eq(num).css('display', 'block').siblings('li').css('display', 'none');
@@ -191,7 +201,7 @@
     //判断是否有传值，有就把值放进去，没有就把初始化的显示位置放入
     if (num == undefined) {
       _this.picIndex = num;
-    } else if (num != undefined && typeof(num) == 'number') {
+    } else if (num != undefined && typeof (num) == 'number') {
 
       //如果传入的值存在就让大图显示传入的值然后跳出
       _this.$thumImgBox.find('li').eq(num).addClass('thum-border').siblings('li').removeClass('thum-border');
@@ -219,7 +229,7 @@
     //判断是否有传值，有就把值放进去，没有就把初始化的显示位置放入
     if (num == undefined) {
       _this.picIndex = num;
-    } else if (num != undefined && typeof(num) == 'number') {
+    } else if (num != undefined && typeof (num) == 'number') {
 
       //如果传入的值存在就让大图显示传入的值然后跳出
       _this.$thumImgBox.find('li').eq(num).addClass('thum-border').siblings('li').removeClass('thum-border');
