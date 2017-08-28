@@ -2,12 +2,14 @@
  * 一个简单的轮播图插件
  * @author frosv
  * @version 0.0.1
+ * @name slick
  * 
  * @param {String} box 整个轮播图盒子
- * @param {String} title 设置当前页数
  * @param {String} imgBox 大图容器
  * @param {String} prevBotton 大图上一页按钮
  * @param {String} nextBotton 大图下一页按钮
+ * @param {Boolean} autoPlay 自动播放
+ * @param {Number} autoPlayTime 自动播放间隔
  */
 
 (function ($, undefind) {
@@ -15,9 +17,10 @@
   let defaults = {
     box: '#demo',
     imgBox: '#switch',
-    title: '',
     prevBotton: '',
-    nextBotton: ''
+    nextBotton: '',
+    autoPlay: false,
+    autoPlayTime: 3000
   };
 
   /**
@@ -53,12 +56,36 @@
    * 
    * @param {String} $imgBox 图片容器
    */
+
   function cloneNode($imgBox) {
     let $imgBoxLi = $imgBox.find('li');
     let fristNode = $imgBoxLi.eq(0).clone();
     let lastNode = $imgBoxLi.eq(-1).clone();
     $imgBoxLi.eq(0).before(lastNode);
     $imgBoxLi.eq(-1).after(fristNode);
+  }
+
+  /**
+   * 自动播放
+   * 
+   * @param {Element} $imgBox 移动容器
+   * @param {Element} next 下一个按钮
+   * @param {Number} time 自动播放间隔 3000(ms)
+   */
+  function autoPlay($imgBox,next, time) {
+
+    let setTime = setInterval(function () {
+      $(next).trigger('click')
+    }, time);
+
+    $imgBox.hover(function(){
+      clearInterval(setTime);
+    },function(){
+      setTime = setInterval(function () {
+        $(next).trigger('click')
+      }, time);
+    });
+
   }
 
   /**
@@ -71,26 +98,36 @@
       this.options = $.extend({}, defaults, options);
       this.$box = $(this.options.box);
       this.$imgBox = $(this.options.imgBox);
+
+      //动画播放状态码
       this.$imgBox.animating = false;
 
       //克隆第一个和最后一个
       cloneNode(this.$imgBox);
 
-      //在这里获取LI宽度是因为clone后的长度会变化不能提交缓存，至少目前没想到办法
+      //在这里获取li宽度是因为clone后的长度会变化不能提交缓存
       this.$imgBoxLi = this.$imgBox.find('li');
       this.liLength = this.$imgBoxLi.length;
       this.imgBoxWidth = this.$imgBoxLi.eq(0).width();
       this.boxWidth = this.imgBoxWidth * this.liLength;
 
+      this.timeSet = null;
+
       this.init();
     }
 
     init() {
+
       //计算图片大小，给外部容器宽度
       this.$imgBox.css('width', this.boxWidth);
 
-      //clone后应移动到第二张
+      //clone后应移动到应该显示的第一张
       this.$imgBox.css('marginLeft', -this.imgBoxWidth);
+
+      //开始自动播放
+      if (this.options.autoPlay) {
+        autoPlay(this.$imgBox,this.options.nextBotton,this.options.autoPlayTime);
+      }
 
       this.bindEvent();
     }
@@ -98,6 +135,8 @@
     bindEvent() {
       let next = this.options.nextBotton;
       let prev = this.options.prevBotton;
+
+      //重新定义上下文的this，分开写事件是为了方便调用
       this.$box.on('click', next, $.proxy(this.nextEvent, this));
       this.$box.on('click', prev, $.proxy(this.prevEvent, this));
     }
@@ -111,6 +150,7 @@
         animateQueue(this.$imgBox, nextWidth, this.boxWidth, this.imgBoxWidth);
       }
     }
+    
     prevEvent() {
       if (!this.$imgBox.animating) {
 
