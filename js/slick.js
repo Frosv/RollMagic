@@ -73,15 +73,15 @@
    * @param {Element} next 下一个按钮
    * @param {Number} time 自动播放间隔 3000(ms)
    */
-  function autoPlay($imgBox,next, time) {
+  function autoPlay($imgBox, next, time) {
 
     let setTime = setInterval(function () {
       $(next).trigger('click')
     }, time);
 
-    $imgBox.hover(function(){
+    $imgBox.hover(function () {
       clearInterval(setTime);
-    },function(){
+    }, function () {
       setTime = setInterval(function () {
         $(next).trigger('click')
       }, time);
@@ -127,7 +127,7 @@
 
       //开始自动播放
       if (this.options.autoPlay) {
-        autoPlay(this.$imgBox,this.options.nextBotton,this.options.autoPlayTime);
+        autoPlay(this.$imgBox, this.options.nextBotton, this.options.autoPlayTime);
       }
 
       this.bindEvent();
