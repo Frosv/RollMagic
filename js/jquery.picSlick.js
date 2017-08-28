@@ -1,8 +1,9 @@
 /** 
  * 一个简单的轮播图插件
  * @author frosv
- * @version 0.0.1
+ * @version 0.0.1 2017-08-28
  * @name slick
+ * MIT license
  * 
  * @param {String} box 整个轮播图盒子
  * @param {String} imgBox 大图容器
@@ -150,7 +151,7 @@
         animateQueue(this.$imgBox, nextWidth, this.boxWidth, this.imgBoxWidth);
       }
     }
-    
+
     prevEvent() {
       if (!this.$imgBox.animating) {
 
