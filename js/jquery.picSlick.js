@@ -23,27 +23,42 @@
   /**
    * 动画列队
    * 
-   * @param {Element} _this 移动的容器
+   * @param {Element} $imgBox 移动的容器
    * @param {Number} moveWidth 移动的距离
+   * @param {Number} boxWidth 容器宽度
+   * @param {Number} imgBoxWidth 图片宽度
    */
-  function animateQueue(_this, moveWidth) {
-    _this.queue(function () {
-      _this.animating = true;
 
-      _this.animate({
-        marginLeft: moveWidth
-      }, 'fast', function () {
-        _this.animating = false;
-      });
-      _this.dequeue();
+  function animateQueue($imgBox, moveWidth, boxWidth, imgBoxWidth) {
+    //添加状态码，防止多次触发
+    $imgBox.animating = true;
+
+    $imgBox.animate({
+      marginLeft: moveWidth
+    }, 'fast', function () {
+      //动画执行完成后允许触发点击效果
+      $imgBox.animating = false;
+
+      //判断是否到了克隆区域，在动画执行完之后直接跳到相应位置，避免视觉误差
+      if (parseInt($imgBox.css('marginLeft'), 10) === -boxWidth + imgBoxWidth) {
+        $imgBox.css('marginLeft', -imgBoxWidth);
+      } else if (parseInt($imgBox.css('marginLeft'), 10) === 0) {
+        $imgBox.css('marginLeft', -boxWidth + (imgBoxWidth * 2));
+      }
     });
   }
 
-  function cloneNode($imgBoxLi) {
+  /**
+   * 克隆第一张和最后一张，并添加到头尾，做好轮播准备
+   * 
+   * @param {String} $imgBox 图片容器
+   */
+  function cloneNode($imgBox) {
+    let $imgBoxLi = $imgBox.find('li');
     let fristNode = $imgBoxLi.eq(0).clone();
     let lastNode = $imgBoxLi.eq(-1).clone();
     $imgBoxLi.eq(0).before(lastNode);
-    $imgBoxLi.eq(-1).before(fristNode);
+    $imgBoxLi.eq(-1).after(fristNode);
   }
 
   /**
@@ -57,10 +72,15 @@
       this.$box = $(this.options.box);
       this.$imgBox = $(this.options.imgBox);
       this.$imgBox.animating = false;
+
+      //克隆第一个和最后一个
+      cloneNode(this.$imgBox);
+
+      //在这里获取LI宽度是因为clone后的长度会变化不能提交缓存，至少目前没想到办法
       this.$imgBoxLi = this.$imgBox.find('li');
-      // cloneNode(this.$imgBoxLi);
+      this.liLength = this.$imgBoxLi.length;
       this.imgBoxWidth = this.$imgBoxLi.eq(0).width();
-      this.boxWidth = this.imgBoxWidth * this.$imgBoxLi.length;
+      this.boxWidth = this.imgBoxWidth * this.liLength;
 
       this.init();
     }
@@ -68,6 +88,9 @@
     init() {
       //计算图片大小，给外部容器宽度
       this.$imgBox.css('width', this.boxWidth);
+
+      //clone后应移动到第二张
+      this.$imgBox.css('marginLeft', -this.imgBoxWidth);
 
       this.bindEvent();
     }
@@ -81,28 +104,20 @@
 
     nextEvent() {
       if (!this.$imgBox.animating) {
-        //判断是否最后一张
-        if (parseInt(this.$imgBox.css('marginLeft'), 10) == -this.boxWidth + this.imgBoxWidth) {
-          this.$imgBox.css('marginLeft', 0);
-          return;
-        }
 
         let nextWidth = parseInt(this.$imgBox.css('marginLeft'), 10) - this.imgBoxWidth;
 
-        animateQueue(this.$imgBox, nextWidth);
+        //动画列队
+        animateQueue(this.$imgBox, nextWidth, this.boxWidth, this.imgBoxWidth);
       }
     }
     prevEvent() {
       if (!this.$imgBox.animating) {
-        //判断是否是第一张
-        if (parseInt(this.$imgBox.css('marginLeft'), 10) == 0) {
-          this.$imgBox.css('marginLeft', -this.boxWidth + this.imgBoxWidth);
-          return;
-        }
 
         let nextWidth = parseInt(this.$imgBox.css('marginLeft'), 10) + this.imgBoxWidth;
 
-        animateQueue(this.$imgBox, nextWidth);
+        //动画列队
+        animateQueue(this.$imgBox, nextWidth, this.boxWidth, this.imgBoxWidth);
       }
     }
   };
