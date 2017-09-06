@@ -11,6 +11,9 @@
  * @param {String} nextBotton 大图下一页按钮
  * @param {Boolean} autoPlay 自动播放
  * @param {Number} autoPlayTime 自动播放间隔
+ * @function $element.pluginName('method') 允许使用的暴露方法
+ * 
+ * 此插件用到ES6的API，所以在使用去前要兼容大部分浏览器请使用babel编译一次后再使用
  */
 
 (function ($, undefind) {
@@ -86,7 +89,12 @@
         $(next).trigger('click');
       }, time);
     });
+  }
 
+  function autoPlay(){
+    let setTime = setInterval(function () {
+      $(next).trigger('click');
+    }, time);
   }
 
   /**
@@ -111,8 +119,6 @@
       this.liLength = this.$imgBoxLi.length;
       this.imgBoxWidth = this.$imgBoxLi.eq(0).width();
       this.boxWidth = this.imgBoxWidth * this.liLength;
-
-      this.timeSet = null;
 
       this.init();
     }
@@ -142,7 +148,7 @@
       this.$box.on('click', prev, $.proxy(this.prevEvent, this));
     }
 
-    nextEvent() {
+    nextEvent(btnType) {
       if (!this.$imgBox.animating) {
 
         let nextWidth = parseInt(this.$imgBox.css('marginLeft'), 10) - this.imgBoxWidth;
@@ -152,7 +158,7 @@
       }
     }
 
-    prevEvent() {
+    prevEvent(btnType) {
       if (!this.$imgBox.animating) {
 
         let nextWidth = parseInt(this.$imgBox.css('marginLeft'), 10) + this.imgBoxWidth;
@@ -165,11 +171,11 @@
 
   //暴露方法
   $.fn[pluginName] = function (options) {
-    var args = Array.prototype.slice.call(arguments, 1);
+    let args = Array.prototype.slice.call(arguments, 1);
 
     return this.each(function () {
-      var $this = $(this);
-      var data = $this.data('plugin_' + pluginName);
+      let $this = $(this);
+      let data = $this.data('plugin_' + pluginName);
 
       if (!data) {
         $this.data('plugin_' + pluginName, (data = new Plugin(this, options)));

@@ -14,13 +14,19 @@
     <div class="img-box" id="imgBox">
       <ul class="switch clearfix" id="switch">
         <li>
-          <img src="../images/b1.jpg" alt="">
+          <img src="
+          http://yun200.qfangimg.com/group1/600x450/M00/2A/90/CvtcKVmNFYSAON15AADNkleda-4208.jpg?style=hk&tailor=false
+        " alt="">
         </li>
         <li>
-          <img src="../images/b2.jpg" alt="">
+          <img src="
+          http://yun200.qfangimg.com/group1/600x450/M00/2A/90/CvtcKVmNFYOAd5OfAADJVkjOiBQ845.jpg?style=hk&tailor=false
+        " alt="">
         </li>
         <li>
-          <img src="../images/b3.jpg" alt="">
+          <img src="
+          http://yun200.qfangimg.com/group1/600x450/M00/29/B7/CvtcKVlCNv2APi8MAAEvyp5_RdU583.jpg?style=hk&tailor=false
+        " alt="">
         </li>
       </ul>
     </div>
@@ -47,13 +53,19 @@
     </div> -->
   </div>
   <script type="text/javascript" src="../js/jquery-3.1.0.min.js"></script>
-  <script type="text/javascript" src="../js/slick.js"></script>
+  <script type="text/javascript" src="../js/jquery-slick.min.js"></script>
   <script type="text/javascript">
-    $('#demo').slick({
-      box: '#demo',
-      prevBotton: '#prev',
-      nextBotton: '#next',
-      autoPlay: true
+    // $('#demo').slick({
+    //   box: '#demo',
+    //   prevBotton: '#prev',
+    //   nextBotton: '#next',
+    //   autoPlay: false
+    // });
+
+    $('.switch').slick({
+      infinite: true,
+      speed: 500,
+      cssEase: 'linear'
     });
   </script>
 </body>
