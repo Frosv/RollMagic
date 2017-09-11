@@ -5,7 +5,7 @@
  * @name slick
  * MIT license
  * 
- * @param {String} box 整个轮播图盒子
+ * @param {String} element 整个轮播图盒子
  * @param {String} imgBox 大图容器
  * @param {String} prevBotton 大图上一页按钮
  * @param {String} nextBotton 大图下一页按钮
@@ -19,7 +19,6 @@
 (function ($, undefind) {
   const pluginName = 'slick';
   let defaults = {
-    box: '#demo',
     imgBox: '#switch',
     prevBotton: '',
     nextBotton: '',
@@ -91,12 +90,6 @@
     });
   }
 
-  function autoPlay(){
-    let setTime = setInterval(function () {
-      $(next).trigger('click');
-    }, time);
-  }
-
   /**
    * 插件主体
    * 
@@ -105,7 +98,7 @@
   class Plugin {
     constructor(element, options) {
       this.options = $.extend({}, defaults, options);
-      this.$box = $(this.options.box);
+      this.$box = $(element);
       this.$imgBox = $(this.options.imgBox);
 
       //动画播放状态码
@@ -120,11 +113,6 @@
       this.imgBoxWidth = this.$imgBoxLi.eq(0).width();
       this.boxWidth = this.imgBoxWidth * this.liLength;
 
-      this.init();
-    }
-
-    init() {
-
       //计算图片大小，给外部容器宽度
       this.$imgBox.css('width', this.boxWidth);
 
@@ -135,6 +123,8 @@
       if (this.options.autoPlay) {
         autoPlay(this.$imgBox, this.options.prevBotton, this.options.nextBotton, this.options.autoPlayTime);
       }
+
+      //响应式图片
 
       this.bindEvent();
     }
@@ -148,7 +138,7 @@
       this.$box.on('click', prev, $.proxy(this.prevEvent, this));
     }
 
-    nextEvent(btnType) {
+    nextEvent() {
       if (!this.$imgBox.animating) {
 
         let nextWidth = parseInt(this.$imgBox.css('marginLeft'), 10) - this.imgBoxWidth;

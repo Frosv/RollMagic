@@ -15,6 +15,10 @@ ul {
   float: left;
 }
 
+.switch li img{
+  width: 100%;
+}
+
 .demo-box {
   position: fixed;
   margin: 0 auto;
@@ -28,18 +32,6 @@ ul {
   width: 1190px;
   height: 100%;
   overflow: hidden;
-}
-
-.thum-box li {
-  width: 50px;
-  height: 50px;
-  float: left;
-  margin-right: 10px;
-}
-
-.thum-box li img {
-  width: 50px;
-  height: 50px;
 }
 
 .clearfix:before,
@@ -83,35 +75,3 @@ ul {
 
 
 /*btn-box end*/
-
-
-/* thum box */
-
-.thum-box .thum-border {
-  border: 3px solid #5cb85c;
-}
-
-.thum-box li {
-  border: 3px solid transparent;
-}
-
-.thum-box ul {
-  margin: 10px auto;
-}
-
-.button-box-thum {
-  width: 140%;
-  margin-left: -100px;
-}
-
-.button-box-thum {
-  top: 525px;
-}
-
-.thum-next {
-  float: right;
-  margin-left: 20px;
-}
-
-
-/* thum box end */
