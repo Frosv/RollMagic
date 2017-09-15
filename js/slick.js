@@ -17,7 +17,7 @@
  */
 
 (function ($, undefind) {
-  const pluginName = 'slick';
+  let pluginName = 'slick';
   let defaults = {
     imgBox: '#switch',
     prevBotton: '',
@@ -47,9 +47,10 @@
 
       //判断是否到了克隆区域，在动画执行完之后直接跳到相应位置，避免视觉误差
       if (parseInt($imgBox.css('marginLeft'), 10) === -boxWidth + imgBoxWidth) {
-        $imgBox.css('marginLeft', -imgBoxWidth);
+        $imgBox.css('transform', 'translateX(' + (-imgBoxWidth) + ')');
       } else if (parseInt($imgBox.css('marginLeft'), 10) === 0) {
-        $imgBox.css('marginLeft', -boxWidth + (imgBoxWidth * 2));
+        var move = -boxWidth + (imgBoxWidth * 2);
+        $imgBox.css('transform', 'translateX(' + (-move) + ')');
       }
     });
   }
